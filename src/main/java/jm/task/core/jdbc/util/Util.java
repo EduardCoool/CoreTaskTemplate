@@ -36,6 +36,4 @@ public class Util {
         ServiceRegistry serviceRegistry = builder.build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
-
-
 }
