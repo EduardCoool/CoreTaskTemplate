@@ -21,7 +21,6 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
 
         try (Statement stmt = connection.createStatement()) {
-
             stmt.executeUpdate("create table if not exists USERS("
                     + "ID serial PRIMARY KEY NOT NULL, "
                     + "NAME VARCHAR(20) NOT NULL, "
@@ -45,7 +44,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO USERS (NAME, LASTNAME, AGE) " +
                 "Values (?, ?, ?)")) {
             stmt.setString(1, name);
@@ -71,8 +69,6 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     public List<User> getAllUsers() {
-
-
         ResultSet resultSet;
         List<User> list = new ArrayList<>();
         try (Statement stmt = connection.createStatement()) {
