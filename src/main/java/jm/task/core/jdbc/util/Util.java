@@ -21,18 +21,7 @@ public class Util {
         return DriverManager.getConnection(URL, USER, PASS);
     }
 
-    public void execUpdate(String update) throws SQLException, ClassNotFoundException {
-        Statement stmt = Util.getPostgreConnection().createStatement();
-        stmt.execute(update);
-        stmt.close();
-    }
-
-    public ResultSet execQuery(String query) throws SQLException, ClassNotFoundException {
-        Statement stmt = Util.getPostgreConnection().createStatement();
-        return stmt.executeQuery(query);
-    }
-
-    public static Configuration getPostgreConfiguration() {
+    public static SessionFactory getPostgreConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
@@ -41,15 +30,12 @@ public class Util {
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "2516");
         configuration.setProperty("hibernate.show_sql", "true");
-        return configuration;
-    }
 
-    public static SessionFactory createSessionFactory() {
-        Configuration configuration = getPostgreConfiguration();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
+
 
 }
